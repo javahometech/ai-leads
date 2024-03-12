@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Git Checkout') {
             steps {
-                echo 'Hello World'
+                git url: "https://github.com/javahometech/ai-leads", branch:"main"
             }
         }
     }
