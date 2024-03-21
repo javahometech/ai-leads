@@ -2,6 +2,7 @@ pipeline {
     agent any
    environment {
         DOCCKER_TAG = "kammana/ai-leads:${getDockerTag()}"
+        CONTAINER_NAME = "aileads"
     }
     stages {
         stage('Maven Build') {
@@ -27,7 +28,15 @@ pipeline {
             steps{
                 sshagent(["dev-docker-host"]){
                     script{
-                        def DOCKER_RUN = "docker run -d -p 8080:8080 --name=aileads ${DOCCKER_TAG}"
+                    
+                    // Check if the container exists
+                    def containerExists = sh(returnStatus: true, script: "docker inspect ${CONTAINER_NAME} >/dev/null 2>&1").status == 0
+
+                    // If the container exists, remove it
+                    if (containerExists) {
+                        sh "docker rm -f ${CONTAINER_NAME}"
+                    }
+                        def DOCKER_RUN = "docker run -d -p 8080:8080 --name=${CONTAINER_NAME} ${DOCCKER_TAG}"
                         sh "ssh ec2-user@172.17.0.10 ${DOCKER_RUN}"
                     }
                 }
