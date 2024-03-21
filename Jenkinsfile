@@ -26,8 +26,10 @@ pipeline {
         stage("Docker - Dev Deploy"){
             steps{
                 sshagent("dev-docker-host"){
-                    env.DOCKER_RUN = "docker run -d -p 8080:8080 --name=aileads ${DOCCKER_TAG}"
-                    sh "ssh ec2-user@172.17.0.10 ${DOCKER_RUN}"
+                    script{
+                        def DOCKER_RUN = "docker run -d -p 8080:8080 --name=aileads ${DOCCKER_TAG}"
+                        sh "ssh ec2-user@172.17.0.10 ${DOCKER_RUN}"
+                    }
                 }
             }
         }
