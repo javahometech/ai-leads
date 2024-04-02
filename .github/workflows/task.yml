@@ -9,3 +9,5 @@ jobs:
     steps:
       - name: Hello Two
         run: echo "This is second Hello"
+      - name: Hello Three
+        run: w
