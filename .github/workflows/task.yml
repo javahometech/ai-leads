@@ -9,10 +9,3 @@ jobs:
         run: |
           echo "One"
           echo "Two"
-  deploy:
-    runs-on: ubuntu-latet
-    steps:
-      - name: Multi line demo
-        run: |
-          echo "One"
-          echo "Two"
