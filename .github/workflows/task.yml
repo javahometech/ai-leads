@@ -12,6 +12,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: 'maven'
           
       # - name: Maven Build
       #   uses: hb0730/maven-action@v1.0.2
