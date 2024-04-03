@@ -5,7 +5,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Multi line demo
-        run: |
-          echo "One"
-          echo "Two"
+      - name: Git Checkout
+        uses: actions/checkout@v4.1.2
+      
