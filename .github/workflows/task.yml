@@ -1,13 +1,18 @@
-name: Demo Two
+name: Prudhvi Job
 on:
   push:
-    branches:
-      - "main"
 jobs:
-  myjob:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latet
     steps:
-      - name: Hello Two
-        run: echo "This is second Hello"
-      - name: Hello Three
-        run: w
+      - name: Multi line demo
+        run: |
+          echo "One"
+          echo "Two"
+  deploy:
+    runs-on: ubuntu-latet
+    steps:
+      - name: Multi line demo
+        run: |
+          echo "One"
+          echo "Two"
