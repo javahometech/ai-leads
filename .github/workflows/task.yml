@@ -3,7 +3,7 @@ on:
   push:
 jobs:
   build:
-    runs-on: ubuntu-latet
+    runs-on: ubuntu-latest
     steps:
       - name: Multi line demo
         run: |
