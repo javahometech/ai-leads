@@ -7,17 +7,13 @@ jobs:
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4.1.2
-      # - name: Set up JDK 11
-      #   uses: actions/setup-java@v4.2.1
-      #   with:
-      #     java-version: '11'
-      #     distribution: 'adopt'
-      #     cache: 'maven'
-          
-      # - name: Maven Build
-      #   uses: hb0730/maven-action@v1.0.2
       - name: Clean and Package with Maven
         run: mvn clean package
       - name: Show target folder
         run: docker info
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       
