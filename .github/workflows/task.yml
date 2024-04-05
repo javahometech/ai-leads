@@ -19,5 +19,5 @@ jobs:
       - name: Clean and Package with Maven
         run: mvn clean package
       - name: Show target folder
-        run: ls target
+        run: docker info
       
