@@ -4,16 +4,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+    # permissions:
+    #   id-token: write
+    #   contents: read
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4.1.2
-      - name: Clean and Package with Maven
-        run: mvn clean package
-      - name: Show target folder
-        run: docker info
+      # - name: Clean and Package with Maven
+      #   run: mvn clean package
+      # - name: Show target folder
+      #   run: docker info
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
