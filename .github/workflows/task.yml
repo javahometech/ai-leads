@@ -18,6 +18,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Get latest commit hash
+        id: commit
+        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+
+      - name: Push to Docker Hub with latest commit tag
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: kammana/wsapp:${{ steps.commit.outputs.hash }}
+
       - name: Pull Docker image on remote host
         uses: appleboy/ssh-action@master
         with:
@@ -25,8 +35,11 @@ jobs:
           username: ${{ secrets.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
           script: |
-            docker pull kammana/wsapp:0.0.1
+            docker pull kammana/wsapp:${{ steps.commit.outputs.hash }}
 
+      - name: Remove if container exists
+        run: "docker rm -f wsapp 2> /dev/null || true"
+        
       - name: Run Docker container on remote host
         uses: appleboy/ssh-action@master
         with:
@@ -34,4 +47,4 @@ jobs:
           username: ${{ secrets.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
           script: |
-            docker run -d --name my-container -p 8080:8080 kammana/wsapp:0.0.1
+            docker run -d --name wsapp -p 8080:8080 kammana/wsapp:${{ steps.commit.outputs.hash }}
