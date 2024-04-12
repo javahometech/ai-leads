@@ -34,4 +34,4 @@ jobs:
           username: ${{ secrets.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
           script: |
-            docker run -d --name my-container -p 8080:80 kammana/wsapp:0.0.1
+            docker run -d --name my-container -p 8080:8080 kammana/wsapp:0.0.1
