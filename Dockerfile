@@ -1,3 +1,3 @@
 FROM tomcat:8
 LABEL app=my-app
-COPY ./target/*.war /usr/local/tomcat/webapps/ai-leads.war
+COPY /home/runner/work/ai-leads/ai-leads/target/*.war /usr/local/tomcat/webapps/ai-leads.war
