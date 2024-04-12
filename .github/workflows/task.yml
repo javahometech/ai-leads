@@ -27,18 +27,6 @@ jobs:
         with:
           push: true
           tags: kammana/wsapp:${{ steps.commit.outputs.hash }}
-
-      - name: Pull Docker image on remote host
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_HOST_IP }}
-          username: ${{ secrets.DEV_SSH_USER }}
-          key: ${{ secrets.DEV_SSH_KEY }}
-          script: |
-            docker pull kammana/wsapp:${{ steps.commit.outputs.hash }}
-
-      - name: Remove if container exists
-        run: "docker rm -f wsapp 2> /dev/null || true"
         
       - name: Run Docker container on remote host
         uses: appleboy/ssh-action@master
@@ -47,4 +35,6 @@ jobs:
           username: ${{ secrets.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
           script: |
+            docker rm -f wsapp 2> /dev/null || true
+            docker pull kammana/wsapp:${{ steps.commit.outputs.hash }}
             docker run -d --name wsapp -p 8080:8080 kammana/wsapp:${{ steps.commit.outputs.hash }}
