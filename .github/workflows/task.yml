@@ -14,6 +14,8 @@ jobs:
         run: mvn clean package
       - name: List files
         run: ls -ltr
+      - name: PWD 
+        run: pwd
       # - name: Show target folder
       #   run: docker info
       # - name: Log in to Docker Hub
