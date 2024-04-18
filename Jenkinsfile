@@ -7,7 +7,7 @@ pipeline {
         stage('Hello World') {
             steps {
                greet("Hari")
-               greet("Gokul")
+               add(10,20)
             }
         }
     }
