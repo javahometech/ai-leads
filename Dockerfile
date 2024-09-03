@@ -1,7 +1,6 @@
 # Stage 1: Build stage
 FROM maven:3.8.4-openjdk-11 AS build
 WORKDIR /app
-
 # Copy the Maven project file
 COPY pom.xml .
 
