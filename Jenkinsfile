@@ -1,10 +1,14 @@
 pipeline{
     agent any
-    
+    environment{
+        TOMCAT_IP="172.31.11.38"
+        TOMCAT_USER="ec2-user"
+
+    }
     stages{
-        stage("Git Checkout"){
+        stage("Code Checkout"){
             steps{
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/javahometech/ai-leads'
+                git credentialsId: 'github', branch: 'main', url: 'https://github.com/javahometech/ai-leads'
             }
         }
         stage("Maven Build"){
@@ -15,10 +19,14 @@ pipeline{
         stage("Tomcat Deploy - Dev"){
             steps{
                 sshagent(['tomcat-dev']) {
-                    // Copy war file to tomcat
-                    sh "scp -o StrictHostKeyChecking=no target/ai-leads.war ec2-user@172.31.38.170:/opt/tomcat9/webapps"
-                    sh "ssh ec2-user@172.31.38.170 /opt/tomcat9/bin/shutdown.sh"
-                    sh "ssh ec2-user@172.31.38.170 /opt/tomcat9/bin/startup.sh"
+                    sh """
+                        # Copy war file to tomcat
+                        scp -o StrictHostKeyChecking=no target/ai-leads.war ${TOMCAT_USER}@${TOMCAT_IP}:/opt/tomcat9/webapps/
+                        # Stop tomcat
+                        ssh ${TOMCAT_USER}@${TOMCAT_IP} /opt/tomcat9/bin/shutdown.sh
+                        # Start tocmcat
+                        ssh ${TOMCAT_USER}@${TOMCAT_IP} /opt/tomcat9/bin/startup.sh
+                    """
                 }
             }
         }
