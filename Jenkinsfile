@@ -6,11 +6,6 @@ pipeline{
 
     }
     stages{
-        stage("Code Checkout"){
-            steps{
-                git credentialsId: 'github', branch: 'main', url: 'https://github.com/javahometech/ai-leads'
-            }
-        }
         stage("Maven Build"){
             steps{
                 sh 'mvn clean package'
