@@ -3,5 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<<<<<<< HEAD
+  <display-name>This project is created for 3 tier architecture for Web Application by Naveen and sumant and gopiii and channai and delhi and mumbai </display-name>
+=======
+  <display-name>This project is created for 3 tier architecture for Web Application by Naveen,sumant and Gopi </display-name>
+>>>>>>> e6d53c6bd26f3c10f33d97398fccef11e25f9682
 </web-app>

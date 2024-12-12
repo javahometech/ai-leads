@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>in.javahome</groupId>
   <artifactId>ai-leads</artifactId>
-  <version>1.7</version>
+  <version>1.8-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>ai-leads Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
