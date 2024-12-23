@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Maven Build') {
             when {
-                branch "develop"
+                branch "uat"
             }
             steps {
                echo "Maven build..."
@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Dev Deploy') {
             when {
-                branch "develop"
+                branch "uat"
             }
             steps {
                echo "Deploying to dev"
